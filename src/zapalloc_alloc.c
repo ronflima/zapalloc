@@ -63,7 +63,7 @@ zapalloc_alloc(zapalloc_context_t context, void **data)
     {
       return E_ZPC_NOMEM;
     }
-  block->used = '\0x1';
+  block->used = (unsigned char) 0x1;
   *data = block->block;
   return E_ZPC_OK;
 }
@@ -98,7 +98,7 @@ append_new_arena(zapalloc_context_t context)
     }
   ++(context->narenas);
   context->arenas = arena;
-  arena = context->arenas[context->narenas - 1];
+  arena = context->arenas + context->narenas - 1;
   arena->nblocks = arena->fblocks = context->nblocks;
   arena->blocks = (struct zapalloc_memory_block *) calloc(context->nblocks, sizeof(struct zapalloc_memory_block) + context->block_size);
   arena->owner = context;
@@ -109,7 +109,7 @@ append_new_arena(zapalloc_context_t context)
     }
   for (block = arena->blocks; block - arena->blocks < arena->nblocks; ++block)
     {
-      block->used = '\0x0';
+      block->used = (unsigned char) 0x0;
       block->owner = arena;
       block->block = (void *)((char *)block + sizeof(struct zapalloc_memory_block));
     }

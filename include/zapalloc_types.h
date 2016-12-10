@@ -66,7 +66,7 @@ struct zapalloc_memory_arena
 {
   size_t nblocks;                        /* Total number of blocks*/
   size_t fblocks;                        /* Number of free blocks */
-  struct zapalloc_memory_context *owner; /* Points to the context that owns this arena */
+  struct zapalloc_context *owner;        /* Points to the context that owns this arena */
   struct zapalloc_memory_block *blocks;  /* List of blocks */
 };
 

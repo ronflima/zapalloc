@@ -3,10 +3,10 @@
 
 AC_PREREQ([2.69])
 AC_INIT([ZapAlloc], [1.0.0], [contato@nineteenapps.com])
-AC_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE
 LT_INIT
 AC_CONFIG_SRCDIR([include/zapalloc.h])
-AC_CONFIG_HEADERS([config.h])
+#AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIRS([m4])
 
 # Checks for programs.
@@ -26,7 +26,6 @@ AC_TYPE_SIZE_T
 # Checks for library functions.
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
-AC_FUNC_CALLOC
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile])

@@ -34,7 +34,7 @@
 
 ZPC_BEGIN_DECLS
 
-extern struct zapalloc_context;
+struct zapalloc_context;
 
 typedef struct zapalloc_context *zapalloc_context_t;
 

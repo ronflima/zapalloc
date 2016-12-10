@@ -8,3 +8,5 @@ include_HEADERS = ../include/zapalloc.h      \
                   ../include/zapalloc_macros.h
 
 noinst_HEADERS = ../include/zapalloc_types.h
+
+AM_CPPFLAGS=-I../include/

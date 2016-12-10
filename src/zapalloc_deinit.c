@@ -38,7 +38,7 @@ have_used_blocks(zapalloc_context_t);
 zapalloc_error_t
 zapalloc_deinit(zapalloc_context_t context)
 {
-  struct zapalloc_arena *arena;
+  struct zapalloc_memory_arena *arena;
   assert(context != NULL);
   assert(context->arenas != NULL);
   if (have_used_blocks(context))
@@ -56,7 +56,7 @@ zapalloc_deinit(zapalloc_context_t context)
 
 static int have_used_blocks(zapalloc_context_t context)
 {
-  struct zapalloc_arena *arena;
+  struct zapalloc_memory_arena *arena;
   for (arena = context->arenas; arena - context->arenas < context->narenas; ++arena)
     {
       /* Optimization: if the number of free blocks is different from the number

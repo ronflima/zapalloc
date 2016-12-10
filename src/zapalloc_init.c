@@ -72,13 +72,13 @@ zapalloc_init (zapalloc_context_t *context, size_t nblocks, size_t bsize)
 static void
 initialize_memory_blocks(struct zapalloc_memory_arena *arena, size_t nblocks)
 {
-  assert (blocks != NULL);
+  assert (arena != NULL);
   assert (nblocks > 0);
   struct zapalloc_memory_block *block;
   for (block = arena->blocks; block - arena->blocks < nblocks; ++block)
     {
-      block->used = '\0x0';
-      block->arena = arena;
+      block->used = (unsigned char)0x0;
+      block->owner = arena;
       block->block = (void *)(((char *)block) + sizeof(struct zapalloc_memory_block)); 
     }
 }
