@@ -35,6 +35,6 @@ zapalloc_free (zapalloc_context_t context, void *data)
 {
   struct zapalloc_memory_block *block = (struct zapalloc_memory_block *)((char *)data - sizeof(struct zapalloc_memory_block));
   ++(block->owner->fblocks);
-  block->used = '\0x0';
+  block->used = (unsigned char) 0x0;
   return E_ZPC_OK;
 }
