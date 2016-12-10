@@ -54,9 +54,11 @@ zapalloc_init (zapalloc_context_t *context, size_t nblocks, size_t bsize)
       free(*context);
       return E_ZPC_NOMEM;
     }
+  (*context)->nblocks = nblocks;
   (*context)->arenas->nblocks = (*context)->arenas->fblocks = nblocks;
   (*context)->arenas->blocks = (struct zapalloc_memory_block *)
     calloc(nblocks, bsize + sizeof(struct zapalloc_memory_block));
+  (*context)->arenas->owner = *context;
   if ((*context)->arenas->blocks == NULL)
     {
       free ((*context)->arenas);

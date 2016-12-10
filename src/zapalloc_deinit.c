@@ -1,8 +1,8 @@
 /* -*-c-*-
    The MIT License (MIT)
-   
+
    Copyright (c) 2016 - Ronaldo Faria Lima
-   
+
    Permission is hereby granted, free of charge, to any person obtaining a copy
    of this software and associated documentation files (the "Software"), to deal
    in the Software without restriction, including without limitation the rights
@@ -20,40 +20,51 @@
    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
    SOFTWARE.
-   
-   Created: 2016-12-09 by Ronaldo Faria Lima
-   
-   This file purpose: Main header file
+
+   Created: 2016-12-10 by Ronaldo Faria Lima
+
+   This file purpose: Deinitializes a given context
 */
 
-#ifndef ZAPALLOC_H
-#define ZAPALLOC_H
 
-#include <stddef.h>
-#include "zapalloc_macros.h"
+#include <stdlib.h>
+#include <assert.h>
+#include "zapalloc.h"
+#include "zapalloc_types.h"
 
-ZPC_BEGIN_DECLS
+static int
+have_used_blocks(zapalloc_context_t);
 
-extern struct zapalloc_context;
+zapalloc_error_t
+zapalloc_deinit(zapalloc_context_t context)
+{
+  struct zapalloc_arena *arena;
+  assert(context != NULL);
+  assert(context->arenas != NULL);
+  if (have_used_blocks(context))
+    {
+      return E_ZPC_BUSY;
+    }
+  for (arena = context->arenas; arena - context->arenas < context->narenas; ++arena)
+    {
+      free(arena->blocks);
+    }
+  free(context->arenas);
+  free(context);
+  return E_ZPC_OK;
+}
 
-typedef struct zapalloc_context *zapalloc_context_t;
-
-/* Error handling */
-typedef enum
-  {
-    E_ZPC_OK = 0x0,  /* Operation concluded correctly */
-    E_ZPC_NOMEM,     /* No memory to conclude operation */
-    E_ZPC_INVAL,     /* Invalid argument */
-    E_ZPC_BUSY       /* Library is busy (possibly blocks are still in use) */
-  } zapalloc_error_t;
-
-/* Main Interfaces */
-
-zapalloc_error_t (zapalloc_init)   __P((zapalloc_context_t *, size_t, size_t));
-zapalloc_error_t (zapalloc_alloc)  __P((zapalloc_context_t, void **));
-zapalloc_error_t (zapalloc_free)   __P((zapalloc_context_t, void *));
-zapalloc_error_t (zapalloc_deinit) __P((zapalloc_context_t));
-
-ZPC_END_DECLS
-                                  
-#endif /* ZAPALLOC_H */
+static int have_used_blocks(zapalloc_context_t context)
+{
+  struct zapalloc_arena *arena;
+  for (arena = context->arenas; arena - context->arenas < context->narenas; ++arena)
+    {
+      /* Optimization: if the number of free blocks is different from the number
+         of blocks, then we have blocks still being used. */
+      if (arena->nblocks != arena->fblocks)
+        {
+          return 0x1;
+        }
+    }
+  return 0x0;
+}

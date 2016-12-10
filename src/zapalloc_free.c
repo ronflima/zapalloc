@@ -1,8 +1,8 @@
 /* -*-c-*-
    The MIT License (MIT)
-   
+
    Copyright (c) 2016 - Ronaldo Faria Lima
-   
+
    Permission is hereby granted, free of charge, to any person obtaining a copy
    of this software and associated documentation files (the "Software"), to deal
    in the Software without restriction, including without limitation the rights
@@ -20,40 +20,21 @@
    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
    SOFTWARE.
-   
-   Created: 2016-12-09 by Ronaldo Faria Lima
-   
-   This file purpose: Main header file
+
+   Created: 2016-12-10 by Ronaldo Faria Lima
+
+   This file purpose: Returns a given block back to a list of blocks inside an arena.
 */
 
-#ifndef ZAPALLOC_H
-#define ZAPALLOC_H
+#include <stdlib.h>
+#include "zapalloc.h"
+#include "zapalloc_types.h"
 
-#include <stddef.h>
-#include "zapalloc_macros.h"
-
-ZPC_BEGIN_DECLS
-
-extern struct zapalloc_context;
-
-typedef struct zapalloc_context *zapalloc_context_t;
-
-/* Error handling */
-typedef enum
-  {
-    E_ZPC_OK = 0x0,  /* Operation concluded correctly */
-    E_ZPC_NOMEM,     /* No memory to conclude operation */
-    E_ZPC_INVAL,     /* Invalid argument */
-    E_ZPC_BUSY       /* Library is busy (possibly blocks are still in use) */
-  } zapalloc_error_t;
-
-/* Main Interfaces */
-
-zapalloc_error_t (zapalloc_init)   __P((zapalloc_context_t *, size_t, size_t));
-zapalloc_error_t (zapalloc_alloc)  __P((zapalloc_context_t, void **));
-zapalloc_error_t (zapalloc_free)   __P((zapalloc_context_t, void *));
-zapalloc_error_t (zapalloc_deinit) __P((zapalloc_context_t));
-
-ZPC_END_DECLS
-                                  
-#endif /* ZAPALLOC_H */
+zapalloc_error_t
+zapalloc_free (zapalloc_context_t context, void *data)
+{
+  struct zapalloc_memory_block *block = (struct zapalloc_memory_block *)((char *)data - sizeof(struct zapalloc_memory_block));
+  ++(block->owner->fblocks);
+  block->used = '\0x0';
+  return E_ZPC_OK;
+}
