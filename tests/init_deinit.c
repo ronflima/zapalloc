@@ -44,6 +44,6 @@ main(void)
       fprintf(stderr, "Failed do de-initializer ZapAlloc Library\n");
       return -0x1;
     }
-  printf("ZapAlloc Test Finished Successfully\n");
+  printf("Ok\n");
   return 0x0;
 }

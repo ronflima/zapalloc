@@ -3,7 +3,7 @@ SUBDIRS=src
 ACLOCAL_AMFLAGS=-I m4
 
 check_PROGRAMS = \
-tests/main
+tests/init_deinit
 
 TESTS = $(check_PROGRAMS)
 
