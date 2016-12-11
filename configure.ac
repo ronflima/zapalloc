@@ -27,7 +27,8 @@
 
 AC_PREREQ([2.69])
 AC_INIT([ZapAlloc], [1.0.0], [contato@nineteenapps.com])
-AM_INIT_AUTOMAKE
+AM_INIT_AUTOMAKE([subdir-objects])
+AM_SILENT_RULES([yes])
 LT_INIT
 AC_CONFIG_SRCDIR([include/zapalloc.h])
 AC_CONFIG_MACRO_DIRS([m4])
@@ -92,10 +93,4 @@ fi
 
 AC_CONFIG_FILES([Makefile
                  src/Makefile])
-# Checks if the test suite exists in the source tree. If yes, create
-# its makefile. Otherwise, just let it go.
-if test -r src/testsuite/Makefile.am; then
-   AC_CONFIG_FILES([src/testsuite/Makefile])
-fi
-
 AC_OUTPUT
