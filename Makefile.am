@@ -2,8 +2,9 @@ SUBDIRS=src
 
 ACLOCAL_AMFLAGS=-I m4
 
-check_PROGRAMS = \
-tests/init_deinit
+check_PROGRAMS = 	\
+tests/init_deinit 	\
+tests/alloc_free
 
 TESTS = $(check_PROGRAMS)
 

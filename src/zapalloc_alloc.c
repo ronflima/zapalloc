@@ -64,6 +64,7 @@ zapalloc_alloc(zapalloc_context_t context, void **data)
       return E_ZPC_NOMEM;
     }
   block->used = (unsigned char) 0x1;
+  --(block->owner->fblocks);
   *data = block->block;
   return E_ZPC_OK;
 }
