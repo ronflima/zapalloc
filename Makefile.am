@@ -4,7 +4,8 @@ ACLOCAL_AMFLAGS=-I m4
 
 check_PROGRAMS = 	\
 tests/init_deinit 	\
-tests/alloc_free
+tests/alloc_free	\
+tests/big_allocations
 
 TESTS = $(check_PROGRAMS)
 
