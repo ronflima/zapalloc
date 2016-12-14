@@ -1,5 +1,5 @@
 # zapalloc
-## The irresponsable memory allocator
+## The irresponsible memory allocator
 Fast memory allocation routines for fixed size memory blocks. This small library
 is intended to provide fast allocation and memory reusage when fixed size memory
 blocks are needed. This assumption makes this library not suitable for general
