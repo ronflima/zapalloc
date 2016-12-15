@@ -13,5 +13,5 @@ autoconf --version
 
 $LIBTOOLIZE
 aclocal
-automake
+automake --add-missing
 autoconf
