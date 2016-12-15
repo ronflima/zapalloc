@@ -12,6 +12,6 @@ automake --version
 autoconf --version
 
 $LIBTOOLIZE
-aclocal --verbose
-automake --verbose 
-autoconf --verbose
+aclocal
+automake
+autoconf
