@@ -1,12 +1,12 @@
 #!/bin/sh
 
-LIBTOOLIZE=libtoolize
-if [ -x `which glibtoolize` ]
+LIBTOOLIZE=glibtoolize
+if [ -x "$(command -v libtoolize)" ]
 then
-    LIBTOOLIZE=glibtoolize
+    LIBTOOLIZE=libtoolize
 fi
 
 $LIBTOOLIZE
-aclocal
-automake
-autoconf
+aclocal --verbose
+automake --verbose 
+autoconf --verbose
