@@ -1,4 +1,6 @@
 # zapalloc
+[![Build Status](https://travis-ci.org/nineteen-apps/zapalloc.svg?branch=master)](https://travis-ci.org/nineteen-apps/zapalloc)
+
 ## The irresponsible memory allocator
 Fast memory allocation routines for fixed size memory blocks. This small library
 is intended to provide fast allocation and memory reusage when fixed size memory
