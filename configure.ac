@@ -25,7 +25,7 @@
 #   
 #   This file is part of ZapAlloc memory allocation library
 
-AC_PREREQ([2.69])
+AC_PREREQ([2.6])
 AC_INIT([ZapAlloc], [1.0.0], [contato@nineteenapps.com])
 AM_INIT_AUTOMAKE([subdir-objects])
 AM_SILENT_RULES([yes])
