@@ -1,5 +1,6 @@
 # zapalloc
-[![Build Status](https://travis-ci.org/nineteen-apps/zapalloc.svg?branch=master)](https://travis-ci.org/nineteen-apps/zapalloc)
+[![Build Status](travis-badge)](travis-url)
+[![License][mit-badge]][mit-url]
 
 ## The irresponsible memory allocator
 Fast memory allocation routines for fixed size memory blocks. This small library
@@ -52,4 +53,9 @@ quantity of system calls.
 
 # License
 
-This library is provided using MIT license. 
+This project is released under the MIT license. See [LICENSE](LICENSE) for details.
+
+[mit-badge]: https://img.shields.io/badge/License-MIT-blue.svg?style=flat
+[mit-url]: https://tldrlegal.com/license/mit-license
+[travis-badge]: https://travis-ci.org/nineteen-apps/zapalloc.svg?branch=master
+[travis-url]: https://travis-ci.org/nineteen-apps/zapalloc
