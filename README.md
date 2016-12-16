@@ -1,5 +1,5 @@
 # zapalloc
-[![Build Status]([travis-badge])]([travis-url])
+[![Build Status][travis-badge]][travis-url]
 [![License][mit-badge]][mit-url]
 
 ## The irresponsible memory allocator
