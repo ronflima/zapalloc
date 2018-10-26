@@ -57,5 +57,5 @@ This project is released under the MIT license. See [LICENSE](LICENSE) for detai
 
 [mit-badge]: https://img.shields.io/badge/License-MIT-blue.svg?style=flat
 [mit-url]: https://tldrlegal.com/license/mit-license
-[travis-badge]: https://travis-ci.org/nineteen-apps/zapalloc.svg?branch=master
+[travis-badge]: https://travis-ci.org/ronflima/zapalloc.svg?branch=master
 [travis-url]: https://travis-ci.org/nineteen-apps/zapalloc
