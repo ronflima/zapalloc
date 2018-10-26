@@ -42,14 +42,27 @@ allocated inside. For instance, let's say you asked for 1024 blocks of 2048
 bytes each. During initialization, ZapAlloc will create a poll of 1024 blocks,
 with 2048 bytes each. Each call to alloc function will return to you a block
 containing 2048 bytes. When you request the 1025th block, ZapAlloc will create a
-new poll containing more 2014 blocks of 2048 bytes each and return a 2048 bytes
+new poll containing more 1024 blocks of 2048 bytes each and return a 2048 bytes
 block to you.
 
 The ideia behind the scenes is to:
 
 - centralize all memory management on a single manageable place (the _context_);
 - request a lot of memory at once, but fewer times to the system, reducing the
-quantity of system calls.
+quantity of system calls, since system calls are too expensive.
+
+## Why don't rely on malloc itself?
+
+The STDC _malloc_ function is great for general memory allocation. Some
+implementations do change the process's core size in order to return memory to
+the system, which is great for general purpose. However, if you want
+performance, it is a great idea avoiding to call the system too many times. Each
+system call will cost you a lot of processing time, since your process will be
+interrupted by the operating system in order to have it's core resized.
+
+So, _zapalloc_ try to avoid those many system calls by allocating a lot of
+memory at once and then managing the memory blocks in a simple fashion, so you
+can have a great performance at the end.
 
 # License
 
